@@ -125,6 +125,16 @@ query_street_ranges("rapid run pike", 4530, 4599)
 ##   filter(name %in% c("saint james ave", "st james ave")) |>
 ##   mapview::mapview(zcol = "name")
 
+## streets |>
+##   filter(name == "mcgregor ave")
+
+streets |>
+  st_drop_geometry() |>
+  select(name) |>
+  distinct() |>
+  arrange(name) |>
+  readr::write_csv("streets.csv")
+
 d_address_ranges$street_ranges <-
   purrr::pmap(d_address_ranges, query_street_ranges, .progress = "querying street ranges")
 
