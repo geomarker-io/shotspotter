@@ -59,10 +59,12 @@ d_address_ranges <-
          x_max = gsub("X", "9", x_max)) |>
   mutate(x_name = str_to_lower(x_name))
 
-#' change "av" to "ave" in city street names to match tigris street names
+#' changes in city street names to match tigris street names
 d_address_ranges <-
   d_address_ranges |>
-  mutate(x_name = str_replace_all(x_name, fixed(" av"), " ave"))
+  mutate(x_name = str_replace_all(x_name, fixed(" av"), " ave")) |>
+  mutate(x_name = str_replace_all(x_name, fixed(" wy"), " way")) |>
+  mutate(x_name = str_replace_all(x_name, fixed("east "), "e "))
 
 #' add suffixes to the end of these specific city street names to match tigris street names
 add_suffix <-
