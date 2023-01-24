@@ -159,8 +159,13 @@ d |>
   select(-x_max, -x_min, -x_name, -n) |>
   saveRDS("shotspotter_street_ranges.rds")
 
-message(scales::percent((nrow(d) - sum(is.na(d$street_ranges))) / nrow(d)),
-        " (n=", sum(is.na(d$street_ranges)), ") of all records were matched to at least one census street range geography")
+message(
+  scales::percent((nrow(d) - sum(is.na(d$street_ranges))) / nrow(d)),
+  " (n=",
+  scales::number(sum(!is.na(d$street_ranges)), big.mark = ","),
+  ") of all ",
+  scales::number(nrow(d), big.mark = ","),
+  " records were matched to at least one census street range geography.")
 
 d |>
   rowwise() |>
