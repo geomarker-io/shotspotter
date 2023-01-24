@@ -158,3 +158,15 @@ d <- left_join(d, d_address_ranges, by = "address_x")
 d |>
   select(-x_max, -x_min, -x_name, -n) |>
   saveRDS("shotspotter_street_ranges.rds")
+
+message(scales::percent((nrow(d) - sum(is.na(d$street_ranges))) / nrow(d)),
+        " (n=", sum(is.na(d$street_ranges)), ") of all records were matched to at least one census street range geography")
+
+d |>
+  rowwise() |>
+  mutate(n_street_ranges = list(nrow(street_ranges))) |>
+  group_by(n_street_ranges) |>
+  summarize(n = n()) |>
+  arrange(desc(n)) |>
+  mutate(`%` = scales::percent(n / sum(n), 1)) |>
+  knitr::kable()
