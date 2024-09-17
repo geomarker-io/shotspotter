@@ -1,3 +1,5 @@
+**This repository is deprecated in favor of https://github.com/geomarker-io/xx_address**
+
 # Cincinnati Shotspotter
 
 This R code creates the `shotspotter` data resource, which is the timing and location of gunshots detected by the shotspotter system in Cincinnati, OH.  All [police calls for service](https://data.cincinnati-oh.gov/safety/PDI-Police-Data-Initiative-Police-Calls-for-Servic/gexm-h6bt) are filtered to shotspotter reports that resulted in a police response and had a known location and date.
